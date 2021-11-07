@@ -16,14 +16,16 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     formbuilder: FormBuilder
-  ) { 
+  ) {
     this.loginForm = formbuilder.group({
       email: [''],
       password: ['']
     })
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
+    this.authService.ifIsAuthenticated()
   }
 
   logIn() {

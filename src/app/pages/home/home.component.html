@@ -1,0 +1,25 @@
+<nav>
+  <h1>
+    Logado como: {{userName}}
+  </h1>
+
+  <button (click)="handleLogout()">Deslogar</button>
+</nav>
+<div class="home-page">
+
+
+  <form action="">
+    <h1>Atualize seus dados</h1>
+    <input type="text" value="{{user.name}}" placeholder="{{user.name}}"><br />
+    <input type="text" value="{{user.email}}" placeholder="{{user.email}}"><br />
+    <button>Atualizar</button>
+  </form>
+
+  <form action="">
+    <h1>Adicione endereços ou contatos</h1>
+    <h2>Endereço</h2>
+    <p *ngFor="let address of userAddresses">
+      {{address.state}}
+    </p>
+  </form>
+</div>

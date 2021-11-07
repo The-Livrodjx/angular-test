@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import axios from "axios";
 import { Observable, throwError } from "rxjs";
 import { User } from "../models/users";
 
@@ -14,15 +15,21 @@ export class UserService {
     baseUrl = "http://localhost:3000/"
 
     constructor(private httpClient: HttpClient) {}
-    
+
     httpOptions = {
-        headers: new HttpHeaders({'Authorization': `Bearer ${this.token}`, 
+        headers: new HttpHeaders({'Authorization': `Bearer ${this.token}`,
         'Content-type': 'application/json'})
     }
-    
+
 
     getUsers(): Observable<User[]> {
-        return this.httpClient.get<User[]>(this.baseUrl)
+        return this.httpClient.get<User[]>(this.baseUrl + 'user')
+            .pipe()
+    }
+
+    getUserById(id: string) {
+
+      return this.httpClient.get<User[]>(`${this.baseUrl}user/${id}`)
             .pipe()
     }
 
@@ -30,7 +37,7 @@ export class UserService {
 
         let errorMessage = '';
         if (error.error instanceof ErrorEvent) {
-    
+
           errorMessage = error.error.message;
         } else {
           errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
