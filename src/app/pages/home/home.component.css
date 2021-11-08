@@ -42,3 +42,42 @@ form input {
 form button {
   padding: 5px 10px;
 }
+
+
+.table-wrapper {
+  margin: 10px 70px 70px;
+  box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2);
+}
+
+.fl-table {
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  background-color: var(--bg-color);
+}
+
+.fl-table td, .fl-table th {
+  text-align: center;
+  padding: 10px;
+}
+
+.fl-table td {
+  border-right: 0px solid #f8f8f8;
+  font-size: 12px;
+}
+
+.fl-table thead th {
+  color: #ffffff;
+  background-color: rgb(11, 158, 158);
+}
+
+td img {
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+}

@@ -9,6 +9,14 @@ interface LoginData {
   password: string
 }
 
+interface BodyAddress {
+  id: string
+  street: string
+  city: string
+  state: string
+  zipCode: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,6 +59,68 @@ export class AuthService {
     }
   }
 
+  async updateUser(id: string, email: string, username: string) {
+
+    return axios.put(`http://localhost:3000/user/update`, {
+      id,
+      email,
+      username
+    }).then((response) => {
+      
+      let storage = JSON.parse(window.localStorage.getItem('USER_INFO') || '{}')
+
+      storage.username = response.data.name
+
+      window.localStorage.setItem("USER_INFO", JSON.stringify(storage))      
+    }).catch(err => {
+      console.log(err)
+    })
+
+  }
+
+  async addAddress(body: BodyAddress) {
+
+    console.log(body)
+    return axios.post("http://localhost:3000/user/createAddress", {
+      body
+    }).then(response => {
+
+    }).catch(err => {
+
+      console.log(err)
+    })
+
+  }
+  
+  excludeAddress(userId: string, addressId: string) {
+
+    axios.post("http://localhost:3000/user/excludeAddress", {
+      userId,
+      addressId
+    }).then(response => {
+
+      console.log(response.data)
+    })
+
+
+  }
+
+  addContact(userId: string, contactId: string) {
+    axios.post("http://localhost:3000/user/createContact", {
+      userId,
+      contactId
+    }).then(response => {
+      console.log(response)
+    }).catch(err => {
+
+      console.log(err)
+    })
+  }
+
+  excludeContact() {
+
+  }
+  
   isAuthenticated() {
     return this.authState.value
   }

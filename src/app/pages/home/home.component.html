@@ -8,18 +8,73 @@
 <div class="home-page">
 
 
-  <form action="">
+  <form [formGroup]="updateForm" novalidate>
     <h1>Atualize seus dados</h1>
-    <input type="text" value="{{user.name}}" placeholder="{{user.name}}"><br />
-    <input type="text" value="{{user.email}}" placeholder="{{user.email}}"><br />
-    <button>Atualizar</button>
+
+    <input type="text" [(ngModel)]="formUserName" formControlName="formUserName" 
+    value="{{user.name}}" name="formUserName" placeholder="{{user.name}}"><br />
+
+    <input type="text" [(ngModel)]="email" formControlName="email"
+     value="{{user.email}}" name="email" placeholder="{{user.email}}"><br />
+    <button (click)="updateUser()">Atualizar</button>
   </form>
 
-  <form action="">
-    <h1>Adicione endereços ou contatos</h1>
+  <h1>Adicione/Remova endereços ou contatos</h1>
+
+  <form [formGroup]="addressForm">
     <h2>Endereço</h2>
-    <p *ngFor="let address of userAddresses">
-      {{address.state}}
-    </p>
+    
+    <input type="text" [(ngModel)]='street' formControlName="street"
+    name="street" placeholder="Nome da rua"><br>
+
+    <input type="text" [(ngModel)]='city' formControlName="city"
+    name="city" placeholder="Nome da cidade"><br>
+
+    <input type="text" [(ngModel)]='state' formControlName="state"
+    name="state" placeholder="Nome do estado"><br>
+
+    <input type="text" [(ngModel)]='zipCode' formControlName="zipCode"
+    name="zipCode" placeholder="CEP"><br>
+
+    <button (click)="addAddress()">Adicionar Endereço</button>
+  </form>
+
+  <div class="table-wrapper">
+
+    <table class="fl-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Rua</th>
+          <th>Cidade</th>
+          <th>Estado</th>
+          <th>CEP</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let address of userAddresses;">
+          <td>{{address.id}}</td>
+          <td>{{address.street}}</td>
+          <td>{{address.city}}</td>
+          <td>{{address.state}}</td>
+          <td>{{address.zipCode}}</td>
+          <td><a (click)="excludeAddress(address.id)"><img src="https://static.thenounproject.com/png/2341854-200.png"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <form [formGroup]="contactForm">
+    <h2>Contato</h2>
+    
+    <input type="text" [(ngModel)]='type' formControlName="type"
+    name="type" placeholder="Tipo de contato"><br>
+
+    <input type="text" [(ngModel)]='contact' formControlName="contact"
+    name="contact" placeholder="Contato"><br>
+
+
+    <button (click)="createContact()">Adicionar Endereço</button>
   </form>
 </div>
